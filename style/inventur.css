@@ -1,0 +1,155 @@
+	* {
+		box-sizing: border-box;
+	}
+	
+	.col-1 {width: 8.33%;}
+	.col-2 {width: 16.66%;}
+	.col-3 {width: 25%;}
+	.col-4 {width: 33.33%;}
+	.col-5 {width: 41.66%;}
+	.col-6 {width: 50%;}
+	.col-7 {width: 58.33%;}
+	.col-8 {width: 66.66%;}
+	.col-9 {width: 75%;}
+	.col-10 {width: 83.33%;}
+	.col-11 {width: 91.66%;}
+	.col-12 {width: 100%;}
+	
+	[class*="col-"]{
+		float:left;
+		padding:15px;
+		border: 1px solid red;
+	}
+	
+	.mainbtn{
+		text-align:center;
+		vertical-align:middle;
+		line-height: 50px;
+		border-radius: 5px;
+		width:37%;
+		height:18%;
+		float:left;
+		background-color: #ffc090; 
+		border:1px solid silver;
+		font-family: 'times new roman', serif;
+		font-size: 90%;
+		margin: 8px;
+		font-size: 4vw; /*viewport width = to auto width*/
+		font-size: 4vh; /*viewport width = to auto height*/
+	}
+	.mainbtn:hover, .submainbtn:hover{
+		background-color: #eec090;
+	}
+
+	.submainbtn{
+		text-align:center;
+		margin-left:10%;
+		margin-right:10%;
+		vertical-align:middle;
+		line-height: 30px;
+		border-radius: 5px;
+		width:25%;
+		height:10%;
+		float:left;
+		background-color: #ffc090; 
+		border:1px solid black;
+		font-family: 'times new roman', serif;
+		font-size: 100%;
+		display:block;
+		font-size: 2.5vw;
+		font-size: 2.5vh;
+	}
+	
+	.msgbox{
+		margin-top:0%;
+		background-color:green;
+		border: 1px solid black;
+	}
+	
+	/***********************single element**************************/
+	.musttextdiv{
+		text-align:left;
+		vertical-align:middle;
+		line-height: 30px;
+	}
+	
+	.musttextdivdeco{
+		border-radius: 5px;
+		border:1px solid black;
+	}
+	
+	.musttext{
+		border: 1px solid #000;
+		padding: 4px 4px;
+		border-radius: 8px;
+		background-color: #ff0;
+		-webkit-appearance: none;
+		width:80%;
+		font-size:150%;
+		float:left;
+		margin-right:20px;
+	}
+	
+	.optiontext{
+		border: 1px solid #000;
+		padding: 4px 12px;
+		border-radius: 8px;
+		background-color: #fff;
+		-webkit-appearance: none;
+		width:80%;
+		font-size:150%;
+		float:left;
+		margin-right:20px;
+	}
+	
+	.smalltext{
+		width: 60%;
+		font-size:100%;
+	}
+	
+	.readonlytest{
+		background-color: #c0c0c0;
+	}
+	
+	.multiareainline{
+		/*text-align:center;*/
+		display:table-cell;
+		vertical-align:middle;
+		width:25%;
+		height:10%;
+		float:left;
+		line-height: 30px;
+	}
+	
+	.configtable{
+		color:green;
+		font-style:bold; 
+		text-align:left;
+		width:100%;
+		
+	}
+	.configtable input, select{
+		background-color: #ff0;
+		width:100px;
+		font-size:120%;
+	}
+	
+	.overviewarea{
+		font-size:100%;
+		line-height:20px;
+		float:left;
+		margin-left:20px
+	}
+
+	/*********************Button class******************************/
+	.btnaction{
+		background-color: #ffc090; 
+		width: 20%;
+		height: 8%;
+		font-style: bold;
+		font-size:100%;
+		border-radius:10px;
+		font-size: 3vw
+	}
+	
+	
