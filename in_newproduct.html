@@ -1,0 +1,183 @@
+<html>
+<head>
+
+<meta charset="UTF-8">
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" type="text/css" href="style/inventur.css">
+
+<script src="./js/usermanager.js"></script> 
+<script src="./js/constcode.js"></script> 
+<script src="./js/hmi.js"></script> 
+<script src="./js/switchcenter.js"></script> 
+<script src="./js/group.js"></script> 
+
+<script>
+	
+	$( document ).ready(function() {
+			var dateObj = new Date();
+			var month = dateObj.getUTCMonth() + 1; //months from 1-12
+			var day = dateObj.getUTCDate();
+			var year = dateObj.getUTCFullYear();
+			$("#id_createdate").val(year+"-"+month+"-"+day);
+			loadexistinggroups();
+	});
+	
+	var buf1 = [];
+	var buf2 = [];
+	function formatMoney1(x, e){
+		
+		
+		
+		//check input char
+		var unicode=e.keyCode? e.keyCode : e.charCode;
+		if (unicode >= 48 && unicode <= 57) {
+				var nr = String.fromCharCode(unicode); 
+				//alert(nr);
+				buf1.push(nr);
+				//alert(buf.length);
+				
+				//output formated amount
+				var output ="";
+				if (buf1.length == 1) output = "€0,0" + buf1[0];
+				if (buf1.length == 2) output = "€0," + buf1[0] + buf1[1];
+				
+				if (buf1.length  > 2){
+					var p1 = "";
+					var p2 = "";
+					for (var i=0; i< buf1.length - 2; i++) p1 +=buf1[i];
+					for (var i= buf1.length - 2; i <buf1.length ; i++) p2 +=buf1[i];
+					//alert(p1 + "," + p2);
+					output = "€" + p1 + "," + p2;
+				}
+				$("#" + x).val(output);
+		}
+		else{
+			//alert("reset buf !!!");
+			$("#" + x).val("€0,00");
+			buf1 = [];
+			return;
+		}
+	}
+	
+	function formatMoney2(x, e){
+		
+		
+		//check input char
+		var unicode=e.keyCode? e.keyCode : e.charCode;
+		if (unicode >= 48 && unicode <= 57) {
+				var nr = String.fromCharCode(unicode); 
+				//alert(nr);
+				buf2.push(nr);
+				//alert(buf.length);
+				
+				//output formated amount
+				var output ="";
+				if (buf2.length == 1) output = "€0,0" + buf2[0];
+				if (buf2.length == 2) output = "€0," + buf2[0] + buf2[1];
+				
+				if (buf2.length  > 2){
+					var p1 = "";
+					var p2 = "";
+					for (var i=0; i< buf2.length - 2; i++) p1 +=buf2[i];
+					for (var i= buf2.length - 2; i <buf2.length ; i++) p2 +=buf2[i];
+					//alert(p1 + "," + p2);
+					output = "€" + p1 + "," + p2;
+				}
+				$("#" + x).val(output);
+		}
+		else{
+			//alert("reset buf !!!");
+			$("#" + x).val("€0,00");
+			buf2 = [];
+			return;
+		}
+	}
+	
+	
+	function resetPartInfo_local(){
+		buf1 = [];
+	    buf2 = [];
+		resetPartInfo();
+	}
+
+	
+</script>
+
+</head>
+<body onload="loadtitlecode('neuen Produkt')">
+	<div id="id_titlearea">
+	</div>
+	
+	<div class="musttextdiv">
+		<P>Barcode
+			<input type="text" class="musttext" name="address" id="id_f1_serialnr"/>
+		</P>
+		
+	</div>
+	<div class="musttextdiv">
+		<P>Bezeichnung
+		<input type="text" class="musttext" name="address" id="id_f1_name"/>
+		</P>
+	</div>
+	
+	
+	
+	<div class="musttextdiv">
+		<div class="musttextdiv">
+			<P>Category
+				<Select id="id_existinggroups" class="musttext">
+				</Select>
+			</P>
+		</div>
+	</div>
+	
+	<!--<div class="musttextdiv">
+			<P>Stockplace
+				<input type="text" class="musttext" name="stockplace" id="id_wheretoplace"/>
+			</P>
+	</div>-->
+	
+	<div  style="display: inline-block; text-align:center; width:80%">
+		
+		<input type="button" class="btnaction" value="Save" onClick="savePartInfo()">
+		<input type="button" class="btnaction" value="Clear" onClick="resetPartInfo_local()">
+	</div>
+	
+	
+	<div class="musttextdiv">
+		<div style="margin: 0 auto; float:left; width:50%">
+			<P>E.K.
+				<input type="text" class="optiontext smalltext" name="address" value="€0,00" id="id_inprice" onkeyup="formatMoney1('id_inprice', event)"/>
+			</P>
+			<P>V.K.
+				<input type="text" class="optiontext smalltext" name="address" value="€0,00"  id="id_outprice" onkeyup="formatMoney2('id_outprice', event)"/>
+			</P>
+		
+			<P>min.
+				<input type="text" class="optiontext smalltext" name="address" id="id_lowerlimit" />
+			</P>
+			<P>max.
+				<input type="text" class="optiontext smalltext" name="address" id="id_uppderlimit" />
+			</P>
+		</div>
+		
+		<div  style="margin: 0 auto; float:right; width:50%">
+			<P>Supplier
+				<input type="text" class="optiontext smalltext" name="address" id="id_f1_supplier" />
+			</P>
+			<P>Date
+				<input type="text" class="optiontext smalltext" name="address" id="id_createdate" />
+			</P>
+		
+			<P>Remark
+				<input type="text" class="optiontext smalltext" name="address" id="id_remark" />
+			</P>
+			<P>Others
+				<input type="text" class="optiontext smalltext" name="address" id="id_others" />
+			</P>
+		
+		</div>
+	</div>
+</body>
+</html>

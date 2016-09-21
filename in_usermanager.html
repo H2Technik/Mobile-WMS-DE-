@@ -1,0 +1,88 @@
+<html>
+<head>
+
+<meta charset="UTF-8">
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.0.min.js"></script>
+<link href="http://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
+<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" type="text/css" href="style/inventur.css">
+<script src="./js/constcode.js"></script> 
+<script src="./js/hmi.js"></script> 
+<script src="./js/switchcenter.js"></script> 
+<script src="./js/mydialog.js"></script> 
+<script src="./js/usermanager.js"></script> 
+
+<script>
+	
+	$(document).ready(function() {
+			//alert("sdfasdfasdf2232");
+			//loadexistinggroups();
+			loadcurusers();
+	});
+	
+</script>
+
+</head>
+<body onload="loadtitlecode('Benutzer Verwaltung')">
+	<div id="id_titlearea">
+	</div>
+	
+	
+	<div class="musttextdiv">
+		<P>Benutzer
+			<Select id="id_existingusers" class="musttext" onChange="loadcurright()">
+				<option>-</option>
+			</Select>
+		</P>
+		<P>Berechtigungen
+			<input type="text" class="optiontext smalltext" style="width:80%" id="id_currights" disabled/>
+		</P>
+	</div>
+	
+	<div  style="display: inline-block; text-align:center; width:80%">
+		<input type="button" class="btnaction" value="Löschen" onClick="deleteUser()">
+	</div>
+	
+	<div class="musttextdiv" style="text-align: center">
+		<div div style="margin: 0 auto; float:left; width:60%; text-align:left">
+			
+			<P>neuer Name
+				<input type="text" class="optiontext smalltext" name="address" id="id_newname" />
+			</P>
+			<P>Passwort 
+				<input type="password" class="optiontext smalltext" name="address" id="id_password1" />
+			</P>
+		
+			<!--<P>Remark
+				<input type="text" class="optiontext smalltext" name="address" id="id_remark" />
+			</P>-->
+			<P>Wiederholung
+				<input type="password" class="optiontext smalltext" name="address" id="id_password2" />
+			</P>
+			<P><input type="button" class="btnaction" style="width:80%" value="Save" onClick="createNewUser()"></P>
+		
+		</div>
+		
+		<div  div style="float:right; width:40%; text-align:left; overflow:scroll; height:40%; border: 1px solid #c0c0c0">
+			<input type="CheckBox" name="rights" value="newprd" class="cright"/>neuen Produkt<br>
+			<input type="CheckBox" name="rights" value="chaprd" class="cright"/>Ändern Produkt<br>
+			<input type="CheckBox" name="rights" value="chagrp" class="cright"/>Überarbeiten Gruppe<br>
+			<input type="CheckBox" name="rights" value="movein" class="cright"/>Einlagerung<br>
+			<input type="CheckBox" name="rights" value="moveou" class="cright"/>Auslagerung<br>
+			<input type="CheckBox" name="rights" value="chamov" class="cright"/>Umlagerung<br>
+			<input type="CheckBox" name="rights" value="report" class="cright"/>Berichte<br>
+			<input type="CheckBox" name="rights" value="invent" class="cright"/>Inventur<br>
+			<input type="CheckBox" name="rights" value="chaplc" class="cright"/>Lagerplätze Ändern<br>
+			<input type="CheckBox" name="rights" value="watplc" class="cright"/>Lagerplätze Überwachen<br>
+			<input type="CheckBox" name="rights" value="userma" class="cright"/>Benutzer<br>
+			
+		</div>
+		
+	</div>
+	
+</body>
+</html>

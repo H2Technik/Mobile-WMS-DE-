@@ -1,0 +1,456 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>鑫晨星云服务器</title>
+
+<script src="jquery/jquery-2.1.1.js"></script>
+<script src="js/hmi.js"></script>
+<!--<script src="js/instock.js"></script>
+<script src="js/outstock.js"></script>
+<script src="js/report.js"></script>-->
+
+<link href="style/wms_mainstyle.css" rel="stylesheet" type="text/css" />
+<link rel="icon" href="http://www.morningstar-service.com.cn/ico.jpg" type="image/x-icon" /> 
+
+<script>
+/*
+	$.ajax({
+			type: "POST",
+			url: "../login/checklogin.php",
+			data: {}
+			})
+			.done(function( message ) {
+				//alert(message);
+				//alert(timestamp(4));
+				$("#id_currenttime").html(timestamp(4));
+				$("#id_usergroup").html(message + 
+									'&nbsp;&nbsp;<a href="./login/logout.php" style="color: #fff">退出<a>');
+				
+				//hidde buttons for extern
+				if (message.indexOf("其他") > -1 || message.indexOf("第三方") > -1){
+					$("#id_globalgeneraldef").toggle();
+					$("#id_cboxlabel").toggle();
+					$("#id_pagecmpoffer").toggle();
+					//$("#id_pageoffmang").toggle();
+					$("#id_pagemang").toggle();
+					$("#id_setgeneral").toggle();
+					
+					//$("#id_btnrefresh").hide();
+					$("#id_labelcautiondate").hide();
+					$("#id_selectdate").hide();
+					
+					$("#id_labelplanstatus").hide();
+					$("#id_selectstatus").hide();
+					
+					$("#id_defectarea").height($("#id_defectarea").height() + 10);
+				}
+				else if (message.indexOf("公司") > -1 ){
+					$("#id_pageexoffer").toggle();
+				}
+				
+				
+				if (message.indexOf("nobody") > -1){
+					window.location = "./login/login.html";
+				}
+			});
+	
+
+
+			
+function reset_btnbgcolor(){
+	$("#id_pagebase").css("background-color", "rgb(240,240,240)");
+	$("#id_pagecmpoffer").css("background-color", "rgb(240,240,240)");
+	$("#id_pageexoffer").css("background-color", "rgb(240,240,240)");
+	$("#id_pageoffmang").css("background-color", "rgb(240,240,240)");
+	$("#id_pagemang").css("background-color", "rgb(240,240,240)");	
+}
+
+	
+
+function open_detail( obj, what ){
+
+	//var str = '<object type="text/html" data="xxx" style="width:100%; height: 400px;"></object>';
+	var str = "xxx";
+	reset_btnbgcolor();
+	$("#"+obj.id).css("background-color", "yellow");
+
+	//if possible save the general defect information
+	if (cur_pageindex == 1 && what !=1 && $("#id_globalgeneraldef").is(":checked")){
+	}
+	cur_pageindex = what;
+
+	
+	switch(what){
+			case 1: str = str.replace("xxx", "definfor.html");
+					break;
+					
+			case 2:str = str.replace("xxx", "adminoperation.html");
+					break;
+					
+			case 3: str = str.replace("xxx", "comoffer.html");
+					break;
+					
+			case 4: str = str.replace("xxx", "exoffer.html");
+					break;
+					
+			case 5: str = str.replace("xxx", "offermanager.html");
+					break;
+		}
+	
+	//by switching page, the offer information have to be saved locally
+
+	
+	//document.getElementById("id_info").innerHTML= str;
+	$("#id_info").load(str);
+	
+	
+}
+*/
+function loadstatus(){
+
+    var now = new Date();
+
+	$("#id_indate").val(now.getFullYear() + "-" + (now.getMonth() +1) + "-"  + now.getDate());
+	$("#id_outdate").val(now.getFullYear() + "-" + (now.getMonth() +1) + "-"  + now.getDate());
+}
+
+</script>
+
+</head>
+<body onload="loadstatus()">
+
+<div id="id_title">
+
+	<div id="id_titlename">
+		<strong>鑫晨星-零配件管理系统</strong>
+	</div>
+	<div id ="id_currenttime" style="color: #fff"></div>
+	<div id ="id_usergroup" style="color: #fff">
+	</div>
+</div>
+
+
+<div id="id_product" class="mainblock">
+   <div class="mainblocktitle"><P>零</P><P>配</P><P>件</P>
+   </div>
+   
+   <div class="functionblock">
+		<table class="functionframe">
+			<tr>
+				<td rowspan="2">
+					设备类型<br>
+					<select id="id_f1_seltype">
+						<option value="machine">整机</option>
+						<option value="parts">配件</option>
+						<option value="consumes">其他耗材</option>
+					</select>
+				</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+				
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			
+			<tr>
+				<td rowspan="2">
+					件号<br>
+					<input type="text" id="id_f1_serialnr" size="20">
+					<button class="funcbutton" style="text-align:left; width:20px" onClick="searchPartInfoById()">?</button>
+				</td>
+				<td>入库价</td>
+				<td><input type="text" id="id_inprice" size="10"></td>
+				<td>出库价</td>
+				<td><input type="text" id="id_outprice" size="10"></td>
+				<td><button class="funcbutton" onClick="savePartInfo()">保存</button>
+					<button class="funcbutton" onClick="UpdatePartInfo()">保存更改</button>
+				</td>
+			</tr>
+				
+			<tr>
+				<td>库存上限</td>
+				<td><input type="text" id="id_uppderlimit" size="10"></td>
+				<td>库存下限</td>
+				<td><input type="text" id="id_lowerlimit" size="10"></td>
+				<td><button class="funcbutton" onClick="deletePartInfo()">删除</button></td>
+			</tr>
+			
+			<tr>
+				<td>
+					名称<br>
+					<input type="text" id="id_f1_name" size="20">
+					<button class="funcbutton" style="text-align:left; width:20px" onClick="searchPartInfoByName()">?</button>
+				</td>
+				<td>供货商</td>
+				<td><input type="text" id="id_f1_supplier" size="20"></td>
+				<td></td>
+				<td></td>
+				<td><button class="funcbutton" onClick="resetPartInfo()">清除</button></td>
+			</tr>
+			
+		</table>
+   </div>
+   
+   <div class="reportblock">
+		<table class="reportframe">
+			<tr> 
+				<td>设备类型<select id="id_sumreport_seltype">
+							<option value="1">全部</option>
+							<option value="2">整机</option>
+							<option value="3">配件</option>
+							<option value="4">其他耗材</option>
+						</select></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td><button class="reportbutton" style="width:120px" onClick="sumPartsReport()">统计总表</button><br>
+					<input type="radio" name="outformat1" value="pdf" id="id_f1_pdf">PDF
+					<input type="radio" name="outformat1" value="excel" id="id_f1_excel">EXCEL
+				</td>
+				<td><P><a id="id_sumreport_link" href="" target="_blank">打开</a></P></td>
+			</tr>
+		</table>
+   
+   </div>
+   
+</div>
+
+<div id="id_stockin" class="mainblock">
+   <div class="mainblocktitle"><P>入</P><P>库</P><P>管</P><P>理</P>
+   </div>
+   
+   <div class="functionblock">
+		<table class="functionframe">
+			<tr>
+				<td rowspan="2">
+					设备类型<br>
+					<select id="id_f2_seltype">
+						<option value="machine">整机</option>
+						<option value="parts">配件</option>
+						<option value="consumes">其他耗材</option>
+					</select>
+				</td>
+				<td>经办人</td>
+				<td><input type="text" id="id_inchargeperson" size="10"></td>
+				<td>保管员</td>
+				<td><input type="text" id="id_incareperson" size="10"></td>
+				<td></td>
+			</tr>
+				
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			
+			<tr>
+				<td rowspan="2">
+					件号<br>
+					<input type="text" id="id_f2_serialnr" size="20">
+				</td>
+				<td>入库数量</td>
+				<td><input type="text" id="id_incount" size="10"></td>
+				<td>入库日期</td>
+				<td><input type="text" id="id_indate" size="10"></td>
+				<td><button class="funcbutton" onClick="saveInStock()">保存</button></td>
+			</tr>
+				
+			<tr>
+				<td>当前库存</td>
+				<td><input type="text" id="id_f2_currentstock" size="10"></td>
+				<td>合同号</td>
+				<td><input type="text" id="id_incontract" size="10"></td>
+				<td><button class="funcbutton" onClick="resetInStock()">清除</button></td>
+			</tr>
+			
+			<tr>
+				<td>
+					名称/标号<br>
+					<input type="text" id="id_f2_name" size="20">
+				</td>
+				<td>供货商</td>
+				<td><input type="text" id="id_f2_supplier" size="20"></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			
+		</table>
+   </div>
+   
+   <div class="reportblock">
+		
+		<table class="reportframe">
+			<tr> 
+				<td>类型</td>
+				<td><select id="id_stockinreport_seltype">
+							<option value="1">全部</option>
+							<option value="2">整机</option>
+							<option value="3">配件</option>
+							<option value="4">其他耗材</option>
+						</select>
+				</td>
+				<td>件号</td>
+				<td><input type="text" id="id_f2rep_serialnr" size="10"></td>
+			</tr>
+			<tr>
+			    <td>名称</td>
+				<td><input type="text" id="id_f2rep_name" size="10"></td>
+				<td>合同号</td>
+				<td><input type="text" id="id_f2rep_contract" size="10"></td>
+			</tr>
+			<tr>
+				<td>从</td>
+				<td><input type="date" id="id_f2rep_start" size="10"></td>
+				<td>至</td>
+				<td><input type="date" id="id_f2rep_end" size="10"></td>
+			</tr>
+			
+				
+			
+			<tr>
+				
+				<td></td>
+				<td><button class="reportbutton" style="width:90px" onClick="sumStockInReport()">入库表</button>
+				<button class="reportbutton" style="width:90px" onClick="clearInSearch()">清除</button><br>
+				<input type="radio" name="outformat2" value="pdf" id="id_f2_pdf">PDF
+					<input type="radio" name="outformat2" value="excel" id="id_f2_excel">EXCEL
+				<td>
+				<td ><a id="id_stockinreport_link" href="" target="_blank">打开</a></td>
+				<td></td>
+			</tr>
+		</table>
+   </div>
+   
+   
+</div>
+
+<div id="id_stockout" class="mainblock">
+   <div class="mainblocktitle"><P>出</P><P>库</P><P>管</P><P>理</P>
+   </div>
+   
+   <div class="functionblock">
+			<table class="functionframe">
+			<tr>
+				<td rowspan="2">
+					设备类型<br>
+					<select id="id_f3_seltype">
+						<option value="machine">整机</option>
+						<option value="parts">配件</option>
+						<option value="consumes">其他耗材</option>
+					</select>
+				</td>
+				<td>经办人</td>
+				<td><input type="text" id="id_outchargeperson" size="10"></td>
+				<td>用途</td>
+				<td>
+					<select id="id_selpurpose">
+						<option value="machine">销售</option>
+						<option value="parts">租赁</option>
+						<option value="consumes">展览演示</option>
+					</select>
+				</td>
+				<td></td>
+			</tr>
+				
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			
+			<tr>
+				<td rowspan="2">
+					件号<br>
+					<input type="text" id="id_f3_serialnr" size="20">
+				</td>
+				<td>出库数量</td>
+				<td><input type="text" id="id_outcount" size="10"></td>
+				<td>出库日期</td>
+				<td><input type="text" id="id_outdate" size="10"></td>
+				<td><button class="funcbutton" onClick="saveOutStock()">保存</button></td>
+			</tr>
+				
+			<tr>
+				<td>当前库存</td>
+				<td><input type="text" id="id_f3_currentstock" size="10"></td>
+				<td>销售合同号</td>
+				<td><input type="text" id="id_outcontract" size="10"></td>
+				<td><button class="funcbutton" onClick="resetOutStock()">清除</button></td>
+			</tr>
+			
+			<tr>
+				<td>
+					名称/标号<br>
+					<input type="text" id="id_f3_name" size="20">
+				</td>
+				<td>客户</td>
+				<td><input type="text" id="id_f3_supplier" size="20"></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			
+		</table>
+   
+   </div>
+   
+   <div class="reportblock">
+		<table class="reportframe">
+			<tr> 
+				<td>类型</td>
+				<td><select id="id_stockoutreport_seltype">
+							<option value="1">全部</option>
+							<option value="2">整机</option>
+							<option value="3">配件</option>
+							<option value="4">其他耗材</option>
+						</select>
+				</td>
+				<td>件号</td>
+				<td><input type="text" id="id_f3rep_serialnr" size="10"></td>
+			</tr>
+			
+			<tr>
+				<td>名称</td>
+				<td><input type="text" id="id_f3rep_name" size="10"></td>
+				<td>销售合同</td>
+				<td><input type="text" id="id_f3rep_contract" size="10"></td>
+			</tr>
+			<tr>
+				<td>从</td>
+				<td><input type="date" id="id_f3rep_start" min="2015-01-01" size="10"></td>
+				<td>至</td>
+				<td><input type="date" id="id_f3rep_end" min="2015-12-01" size="10"></td>
+			</tr>
+			
+			<tr>
+				<td></td>
+				<td ><button class="reportbutton" style="width:100px" onClick="sumStockOutReport()">出库表</button>
+				<button class="reportbutton" style="width:100px" onClick="clearOutSearch()">清除</button><br>
+				<input type="radio" name="outformat3" value="pdf" id="id_f3_pdf">PDF
+					<input type="radio" name="outformat3" value="excel" id="id_f3_excel">EXCEL</td>
+				<td><a id="id_stockoutreport_link" href="" target="_blank">打开</a></td>
+				<td></td>
+			</tr>
+		</table>
+   </div>
+   
+</div>
+
+
+
+</body>
+</html>

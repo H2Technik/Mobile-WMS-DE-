@@ -1,0 +1,103 @@
+<html>
+<head>
+
+<meta charset="UTF-8">
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" type="text/css" href="style/inventur.css">
+
+<script src="./js/usermanager.js"></script> 
+<script src="./js/constcode.js"></script> 
+<script src="./js/switchcenter.js"></script> 
+<script src="./js/instock.js"></script> 
+<script src="./js/hmi.js"></script> 
+
+
+<script>
+
+	$( document ).ready(function() {
+			/*var dateObj = new Date();
+			var month = paddingzero(dateObj.getUTCMonth() + 1,2); //months from 1-12
+			var day = paddingzero(dateObj.getUTCDate(),2);
+			var year = paddingzero(dateObj.getUTCFullYear(),2);
+			var hh = paddingzero(dateObj.getHours(),2);
+			var mm = paddingzero(dateObj.getMinutes(),2);
+			var ss = paddingzero(dateObj.getSeconds(),2);
+			$("#id_deliverydate").val(year+"-"+month+"-"+day+ " " + hh + ":" + mm + ":" + ss);
+			*/
+			$("#id_stockinnew").hide();
+			$("#id_f1_serialnr").focus();
+	});
+	
+</script>
+</head>
+
+<body onload="loadtitlecode('Einlager. Information')">
+	<div id="id_titlearea">
+	</div>
+	
+	<div class="musttextdiv">
+		
+		<input type="text" class="readonlytest" name="address" id="id_prodname" style="margin-top:20px;width:100%" disable"/>
+		
+		<P>Barcode
+			<textarea type="text" class="musttext" name="address" id="id_f1_serialnr" onblur="loadCurrentCntIn()" onchange="changeBarcodeIn()"></textarea>
+		</P>
+		
+	</div>
+	
+	<div class="musttextdiv">
+			<P>Lagerplatz
+				<input type="text" class="musttext" name="stockplace" id="id_wheretoplace"/>
+			</P>
+	</div>
+	
+	<div class="musttextdiv">
+		
+		<div class="multiareainline">
+			Aktu.
+			<input type="number" class="musttext smalltext readonlytest"  id="id_currentcnt"/>
+		</div>
+		
+		<div class="multiareainline" >
+			Eing.
+			<input type="number" class="musttext smalltext"  id="id_incnt" />
+		</div>
+		
+	</div>
+	
+	<div  style="display: inline-block; text-align:center; width:80%; margin: 20px;">
+	</div>
+	
+	<div class="musttextdiv" style="text-align: center">
+		<div div style="margin: 0 auto; float:left; width:60%">
+			
+			<P>Supplier
+				<input type="text" class="optiontext smalltext" name="address" id="id_supplier" />
+			</P>
+			<!--<P>Date
+				<input type="text" class="optiontext smalltext" name="address" id="id_deliverydate" />
+			</P>-->
+		
+			<!--<P>Remark
+				<input type="text" class="optiontext smalltext" name="address" id="id_remark" />
+			</P>-->
+			<P>Others
+				<input type="text" class="optiontext smalltext" name="address" id="id_others" />
+			</P>
+			
+			<input type="hidden" id="id_maxcnt" />
+			<input type="hidden" id="id_mincnt" />
+			
+		</div>
+		
+		<div  div style="float:right; width:40%; text-aligh:center;">
+			<input type="button" class="btnaction" value="Save"  style="width:80%; margin:10px;" onClick="saveInStock()"><br>
+			<input type="button" class="btnaction" value="Clear"  style="width:80%; margin:10px;" onClick="resetInStock()"><br>
+			<input type="button" class="btnaction" value="New" style="width:80%; margin:10px;" id="id_stockinnew" onClick="NewProductByStockIn()"><br>
+		</div>
+		
+	</div>
+	
+</body>
+</html>

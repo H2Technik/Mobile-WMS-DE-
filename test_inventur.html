@@ -1,0 +1,58 @@
+<html>
+
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="./js/report.js"></script>
+<script src="./js/dynsearchcondition.js"></script>
+</head> 
+
+<script>
+</script>
+
+<body>
+
+
+ID: <input type="text" id="id_serialnr">
+<br>
+Current: <input type="text" id="id_curcnt">
+
+<br>
+actual: <input type="text" id="id_actcnt">
+
+<br>
+supplier: <input type="text" id="id_supplier">
+
+<br>
+Inventur Date: <input type="text" id="id_invdate">
+
+<br>
+<input type="button" onclick="loadbalancedvalue()" value="Load">
+<input type="button" onclick="saveinventoryinfo()" value="Save">
+
+<hr>
+
+ID: <input type="text" id="id_serialnr2">
+
+<input type="button" onclick="loadwarehausinfo()" value="Load">
+<textarea id="id_json_rettable">
+</textarea>
+<input type="checkbox" id="id_reportprod">Produkct
+<input type="checkbox" id="id_reportbal">Balanced
+<input type="checkbox" id="id_reportinv">Inventuren
+<input type="checkbox" id="id_reportstockin">Stock In
+<input type="checkbox" id="id_reportstockout">Stock Out
+
+<input type="button" onclick="createreports()" value="Create XLS"><br>
+
+<hr>
+
+ <input type="button" onclick="addnewselection()">
+ <br>
+ <div id="id_conditionarea">
+ 
+ </div>
+
+ <input type="button" id="id_userreport" onclick="createuserreport()">
+</body>
+
+</html>

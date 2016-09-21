@@ -1,0 +1,107 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.0.min.js"></script>
+<link href="http://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
+<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+
+
+
+<link rel="stylesheet" type="text/css" href="style/inventur.css">
+<script src="./js/usermanager.js"></script> 
+<script src="./js/mydialog.js"></script> 
+<script src="./js/constcode.js"></script> 
+<script src="./js/hmi.js"></script> 
+<script src="./js/switchcenter.js"></script> 
+<script src="./js/stockplace.js"></script> 
+
+<script>
+	
+	$(document).ready(function() {
+		$("#id_confignewplace").hide();
+		initactualplace(1);
+		$("#id_visualarea").hide();
+		findRightforPlace();
+	});
+	
+</script>
+
+  <style>
+         .ui-widget-header,.ui-state-default, ui-button{
+            background:#b9cd6d;
+            border: 1px solid #b9cd6d;
+            color: #FFFFFF;
+            font-weight: bold;
+         }
+      </style>
+
+</head>
+
+<body onload="loadtitlecode('Lagerplatzverwaltung Information')">
+	<div id="id_titlearea">
+	</div>	
+	
+	<div  style="display: inline-block; text-align:center; width:80%">
+		<input type="button" class="btnaction" value="Ändern" onClick="newStockplace()" id="id_changeact">
+		<input type="button" class="btnaction" value="Monitor" onClick="overviewStockplace()" id="id_viewplaces">
+	</div>
+	
+	<div class="musttextdiv musttextdivdeco" id="id_newstockplace">
+		<table  id="id_confignewplace" class="configtable">
+			<tr>
+				<td>Ort<br><select id="id_existingloc" onchange="initactualplace(2)"></select>
+					<input type="button" class="actchange" value="Löschen" onclick="deleteStockplace(1)">
+				</td>
+				<td></td>
+				<td>neuer Ort<br><input id="id_newloc" size="4"></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>Bereich<br><select id="id_existingarea" onchange="initactualplace(3)"></select>
+					<input type="button" class="actchange" value="Löschen" onclick="deleteStockplace(2)">
+				</td>
+				<td></td>
+				<td>neuer Bereich<br><input id="id_newarea" size="4"></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>Reihe<br><select id="id_existingcol"></select>
+					<input type="button" class="actchange" value="Löschen" onclick="deleteStockplace(3)">
+				</td>
+				<td></td>
+				<td>neuer Reihe<br><input type="text"  id="id_newcol" size="4"></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>Anzahl Spalten<br><input type="number" id="id_colcnt" size="4"></td>
+				<td></td>
+				<td>Anzahl Ebene<br><input type="number" id="id_levelcnt" size="4"></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>Anzahl Pos.<br><input type="number" id="id_poscnt" size="4"></td>
+				<td></td>
+				<td>Extra<br><input id="id_info" size="20"></td>
+				<td></td>
+			</tr>
+				<tr>
+				<td><input type="button" class="actchange" value="Speicher" style="font-size:150%" onClick="saveStockplace()"></td>
+				<td></td>
+				<td><input type="button"  value="Clear" style="font-size:150%" onClick="clearStockplace()"></td>
+				<td></td>
+			</tr>
+		</table>
+	</div>
+	
+	<div id="id_visualarea" style="text-align:center; margin-top:20px; border: 1px solid black; border-radius:10px; background-color: #c4e59e; height:auto; overflow:auto">
+		<P><input type="checkBox" id="id_isonline" onclick="monitoring()" unchecked> Online Überwachen <label id="id_refreshstatus">0</label></P>
+		<div id="id_overviewstockplace"></div>
+		
+	</div>
+	
+	
+	
+</body>
+</html>

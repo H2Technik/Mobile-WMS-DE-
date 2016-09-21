@@ -1,0 +1,189 @@
+<html>
+<head>
+
+<meta charset="UTF-8">
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" type="text/css" href="style/inventur.css">
+ 
+<script src="./js/constcode.js"></script> 
+<script src="./js/hmi_test.js"></script> 
+
+
+<script>
+	
+	var interval = 3000;
+	
+	var fixed_value="\"1000\", \"a\", 1, \"\", \"" + getTimestempel() + "\", \"\"" ;
+	var fixed_condi = "Code='1000'";
+	var intimer;
+	var incol = 0;
+	var inrow = 0;
+	
+	var outcol = 0;
+	var outrow = 0;
+	var outtimer;
+	
+	$(document).ready(function() {
+		$("#id_other_in").val(fixed_value);
+		//$("#id_other_out").val(fixed_value);
+		//alert(fixed_value);
+	});
+	
+	
+	function startIn(){
+		//alert("1");
+		intimer = setInterval(stockin, interval);
+	}
+	
+	function stopIn(){
+		//alert("stop");
+		clearInterval(intimer);
+	}
+	
+	function stockin(){
+	
+		//alert("2");
+		
+	
+		var j_update = {"action":"INSERT_STOCKIN", "COL_LIST":"", "VALUES":"", "CONDI":""};
+		j_update.COL_LIST = "`Code`, `Name`, `Quantity`, `Supplier`, `InDate`, `Info`, `Stockplace`";
+	
+	
+		j_update.VALUES = "(" + $("#id_other_in").val() + ",";   //other info
+		j_update.VALUES += "\"" + returnstockplace_in() + "\")";    		//stockplace
+		
+			
+		j_update.CONDI=fixed_condi;
+		//alert(j_update.CONDI);
+		//alert(j_update.VALUES);
+		asynAjaxCall(j_update, 20/*STOCK_IN*/);
+			
+	}
+	
+	function stepIn(){
+		stockin();
+	}
+	
+	//////////////////////////////////////////////////////////
+	function startOut(){
+		outtimer = setInterval(stockOut, interval);
+	}
+	
+	function stopOut(){
+		clearInterval(outtimer);
+	}
+	
+	function stockOut(){
+		
+		//alert("2");
+	
+		var j_update = {"action":"INSERT_STOCKOUT", "COL_LIST":"", "VALUES":"", "CONDI":""};
+		j_update.COL_LIST = "`Code`, `Name`, `Quantity`, `Customer`, `OutDate`, `Info`, `Stockplace`";
+	
+	
+		j_update.VALUES = "(" + $("#id_other_in").val() + ",";   //other info
+		j_update.VALUES += "\"" + returnstockplace_out() + "\")";    		//stockplace
+		
+			
+		j_update.CONDI=fixed_condi;
+		//alert(j_update.CONDI);
+		//alert(j_update.VALUES);
+		asynAjaxCall(j_update, 21/*STOCK_OUT*/);
+	}
+	
+	function stepOut(){
+		//alert("1");
+		stockOut();
+	}
+	
+	//////////////////padding zero////////////////////////////
+	function returnstockplace_in(){
+		
+		var place = $("#id_locarea_in").val();
+		
+		var maxrow = $("#id_row_in").val();
+		var maxcol = $("#id_col_in").val();
+		
+		if (incol >= maxcol){
+			incol = 0;
+			
+			if (inrow >= maxrow){
+				inrow = 0;
+				//alert("In Stopped !");
+				stopIn();
+				
+			} 
+			else{
+				inrow +=1;
+			} 
+		}
+
+		place += paddingzero(inrow, 3);
+		place += paddingzero(incol++, 3);
+		place += "000";
+		return place;
+	}
+
+	
+	function returnstockplace_out(){
+		
+		var place = $("#id_locarea_in").val();
+		
+		var maxrow = $("#id_row_in").val();
+		var maxcol = $("#id_col_in").val();
+		
+		if (outcol >= maxcol){
+			outcol = 0;
+			
+			if (outrow >= maxrow){
+				outrow = 0;
+				//alert("In Stopped !");
+				stopOut();
+				
+			} 
+			else{
+				outrow +=1;
+			} 
+		}
+
+		place += paddingzero(outrow, 3);
+		place += paddingzero(outcol++, 3);
+		place += "000";
+		return place;
+	}
+	
+	
+</script>
+</head>
+
+<body>
+	
+	<div>
+		<h3>Testen Einlagerung<h3>
+		<input type="button" value="start" onclick="startIn()"/>
+		<input type="button" value="stop" onclick="stopIn()"/>
+		<input type="button" value="step" onclick="stepIn()"/>
+		<P>Root<input type="text" id="id_locarea_in"></P>
+		<P>Col<input type="text" id="id_row_in"></P>
+		<P>Level<input type="text" id="id_col_in"></P>
+		<P><input type="text" id="id_other_in" size="150"></P>
+	</div>
+	
+	<hr>
+		<h3>Testen Auslagerung<h3>
+		<input type="button" value="start" onclick="startOut()"/>
+		<input type="button" value="stop" onclick="stopOut()"/>
+		<input type="button" value="step" onclick="stepOut()"/>
+		<!--<P><input type="text" id="id_locarea_out"></P>
+		<P><input type="text" id="id_row_out"></P>
+		<P><input type="text" id="id_col_out"></P>
+		<P><input type="text" id="id_other_out" size="150"></P>-->
+	<hr>
+	
+	<div>
+	
+	</div>
+	
+</body>
+</html>

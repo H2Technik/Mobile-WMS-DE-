@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.0.min.js"></script>
+<script src="./js/usermanager.js"></script> 
+
+
+  <title>H-2 Lagerverwaltung</title>
+    <link rel="stylesheet" href="login-form/css/style.css" media="screen" type="text/css" />
+
+</head>
+
+<body>
+  <!--<span class="button" style="color:#CCC; font-weight:bold; font-size: 32px">Individual Design byself</span>
+  <span href="#" class="button" id="toggle-login">Log in</span>-->
+	<div class="button fade-in one" ondblclick="clearLastLogin()">	
+	</div>
+	
+<div id="login">
+  <div id="triangle"></div>
+	
+	<h3>Log in</h3>
+
+    <input type="text" id="id_username" placeholder="Benutzername" />
+    <input type="password" id="id_password" placeholder="Passwort" />
+    <input type="button" value="Log in" onclick="checkLogin()" style="font-size:30px; width:94%; height:50px; padding:1%; background-color:#ffc090" />
+
+</div>
+
+  <script src='jquery/jquery-2.1.1.js'></script>
+
+  <script src="login-form/js/index.js"></script>
+
+</body>
+
+</html>

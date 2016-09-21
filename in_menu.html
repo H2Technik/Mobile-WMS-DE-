@@ -1,0 +1,69 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" type="text/css" href="style/inventur.css">
+
+<script src="./js/usermanager.js"></script> 
+<script src="./js/switchcenter.js"></script>
+
+<script>
+	$(document).ready(function() {
+			doSecurityCheck();
+	});
+</script>
+</head>
+
+
+<body>
+<div style="position:absolute; top: 0; background-color:#c0c0c0; width:100%; text-align:center" id="id_homeinfo">
+	
+</div>
+
+<div class="mainbtn" onclick="switchpage(0)" id="id_newp">
+	<P>neuer Produkt</P>
+</div>
+
+<div class="mainbtn"  onclick="switchpage(6)" id="id_grop">
+	<P>Kategorie</P>
+</div>
+
+
+<div class="mainbtn" onclick="switchpage(1)" id="id_chap">
+	<P>Produkt Ändern</P>
+</div>
+
+<div class="mainbtn"  onclick="switchpage(2)" id="id_moin">
+	<P>Einlagerung</P>
+</div>
+
+<div class="mainbtn"  onclick="switchpage(3)" id="id_moou">
+	<P>Auslagerung</P>
+</div>
+
+<div class="mainbtn"  onclick="switchpage(9)" id="id_chamove">
+	<P>Umlagerung</P>
+</div>
+
+
+<div class="mainbtn"  onclick="switchpage(4)" id="id_repo">
+	<P>Berichte</P>
+</div>
+
+<div class="mainbtn"  onclick="switchpage(5)" id="id_inve">
+	<P>Inventuren</P>
+</div>
+
+<div class="mainbtn"  onclick="switchpage(7)" id="id_plac">
+	<P>Lagerplätze</P>
+</div>
+
+<div class="mainbtn"  onclick="switchpage(8)" id="id_user">
+	<P>Benutzer</P>
+</div>
+
+
+
+</body>
+</html>

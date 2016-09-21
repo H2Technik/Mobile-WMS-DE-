@@ -1,0 +1,61 @@
+<!--
+//session_start();//require './exe/usermanager.php';//logUserOut();//session_destroy();
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head> <title>H-2 Technik</title>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.0.min.js"></script> <script src="./js/usermanager.js"></script>   <script>		$( document ).ready(function() {			logoutuser();		});		  </script> 
+ <style>
+html, BODY{
+	background-color: #999;
+	margin: 0 auto;
+	height: 100%;
+	font-size:20px;
+	}
+
+.clogin{
+	background-color:#666;
+	margin:auto;
+    position:absolute;
+    top:0;
+	bottom:0; 
+    left:0;
+	right:0; 
+	height:230px;
+	width:300px;
+	border:#FFF thick solid;
+	border-radius: 10px;
+	
+	}
+#id_loginimg{
+	width:100%;
+	height:100%;
+	margin:0 auto;		background-size:100%;	background-repeat: no-repeat;
+	background-image: url("./img/logo.jpg");
+	}
+
+#id_userinput{
+	text-align:center;
+	width:90%;
+	height:60%;
+	margin:0 auto;}
+	
+#id_text{
+	color:#FFF}
+</style>
+ 
+ </head>
+ 
+ 
+ <body>
+ <div class="clogin">
+ 	<div id="id_loginimg" >
+    </div>
+   
+    <div id="id_userinput">
+    <p>Aufwiedersehen !</p>
+	<a href="index.php"><p>wieder Einloggen</p></a>
+ 	</div>
+ </div>
+ </body>
+ </html>

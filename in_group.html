@@ -1,0 +1,61 @@
+<html>
+<head>
+
+<meta charset="UTF-8">
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" type="text/css" href="style/inventur.css">
+
+<script src="./js/usermanager.js"></script> 
+<script src="./js/constcode.js"></script> 
+<script src="./js/hmi.js"></script> 
+<script src="./js/switchcenter.js"></script> 
+<script src="./js/group.js"></script> 
+
+<script>
+	
+	$(document).ready(function() {
+			//alert("sdfasdfasdf2232");
+			loadexistinggroups();
+	});
+	
+</script>
+
+</head>
+<body onload="loadtitlecode('Kategorie Information')">
+	<div id="id_titlearea">
+	</div>
+	
+	
+	<div class="musttextdiv">
+		<div class="musttextdiv">
+			<P>Category
+				<Select id="id_existinggroups" class="musttext">
+				</Select>
+			</P>
+		</div>
+	</div>
+	
+	<div  style="display: inline-block; text-align:center; width:80%">
+		<input type="button" class="btnaction" value="Löschen" onClick="deleteGroup()">
+	</div>
+	
+	
+	<div class="musttextdiv">
+		<P>neue Kategore
+			<input type="text" class="musttext" name="address" id="id_new_group"/>
+		</P>
+		<P>Remark
+			<input type="text" class="optiontext" name="address" id="id_newgrp_info"/>
+		</P>
+	</div>
+
+	
+	
+	<div  style="display: inline-block; text-align:center; width:80%">
+		<input type="button" class="btnaction" value="Save" onClick="saveNewGroup()">
+	</div>
+	
+	
+</body>
+</html>

@@ -1,0 +1,48 @@
+<html>
+<head>
+
+<meta charset="UTF-8">
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" type="text/css" href="style/inventur.css">
+
+<script src="./js/usermanager.js"></script> 
+<script src="./js/constcode.js"></script> 
+<script src="./js/switchcenter.js"></script> 
+<script src="./js/dynsearchcondition.js"></script> 
+<script src="./js/report.js"></script> 
+
+<script>
+	
+</script>
+
+</head>
+<body onload="loadtitlecode('Erstellen Berichte')">
+	<div id="id_titlearea">
+	</div>
+	
+	<div class="musttextdiv" style="text-align: center">
+		<div div style="float:left; width:50%">
+			<P><input type="button" class="btnaction" style="width:70%"  onclick="addnewselection()" value="neue Kondition"></P>
+			<div id="id_conditionarea">
+			</div>
+			<P><input type="button" class="btnaction" style="width:70%" id="id_userreport" onclick="createuserreport()" value="Erstellen"></P>
+		</div>
+		
+		<div  div style="float:left; width:50%; text-aligh:center;">
+			<P><input type="button" class="btnaction" style="width:70%" onclick="createreports()" value="Create XLS"></P>
+			<P><input type="checkbox" id="id_reportprod">Produkct</P>
+			<P><input type="checkbox" id="id_reportbal">Balanced</P>
+			<P><input type="checkbox" id="id_reportinv">Inventuren</P>
+			<P><input type="checkbox" id="id_reportstockin">Stock In</P>
+			<P><input type="checkbox" id="id_reportstockout">Stock Out</P>
+		</div>
+		
+	</div>
+	
+	
+	<div id="id_filelink" style="text-align:center; width:100%; position:absolute; bottom: 0">
+	</div>
+	
+</body>
+</html>
